@@ -58,8 +58,7 @@ export class LoginComponent implements OnInit,OnDestroy {
           this.router.navigateByUrl('/home');
         },
       error: (error)=>{
-
-          this.msg =error.error.msg;
+          this.msg = `${error.error.message}. User doesn't exist` ;
       }
      }));
   }
