@@ -1,0 +1,25 @@
+<div class="ticket-form">
+  <div class="form-header">
+      <h2>Apply Leave</h2>
+  </div>
+  <div class="error-msg">
+    {{leaveMsg}}
+</div>
+  <div>
+      <form [formGroup]="leaveForm" (submit)="onApplyLeave()">
+
+          <label>From Date: </label>
+
+          <input type="date" name="from" formControlName="from" class="form-control">
+          <br /><br />
+          <label>To Date: </label>
+          <input type="date" name="to" formControlName="to">
+          <br /><br />
+          <label>Number of Days: </label>
+          <input type="text" formControlName="numDays">
+          <br /><br />
+          <input type="submit" value="Apply Leave" [disabled]="!leaveForm.valid">
+      </form>
+  </div>
+
+</div>

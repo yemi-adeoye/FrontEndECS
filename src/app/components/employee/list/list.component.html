@@ -1,0 +1,34 @@
+
+<div class="container">
+  <div class="leave-list">
+      <div class="leave-item" >
+          <header>Pending Leaves</header>
+          {{msg}}
+          <div class="ticket-item" *ngFor="let l of leaves">
+            From Date: {{l.from.split("T",2)[0]}}  &nbsp;&nbsp;&nbsp;&nbsp;
+            To Date: {{l.to.split("T",2)[0]}} <br />
+            Number of Days: {{l.days}}  &nbsp;&nbsp;&nbsp;&nbsp;
+            Status: <strong>{{l.status}}</strong>
+            <div class="ticket-response" *ngIf="l.comments">
+                {{l.comments}}
+            </div>
+            <br />
+            <button class="ticket-button" (click)="onLeaveDelete(l.id)">Archive</button>
+            <hr>
+      </div>
+      </div>
+  </div>
+  <div class="ticket-list">
+    <header>Open Tickets</header>
+      <div class="ticket-item" *ngFor="let t of tickets">
+            Issue: {{t.issue}} <br />
+            Priority: {{t.priority}} &nbsp;&nbsp;&nbsp;&nbsp;
+            Posted At: {{t.generatedDate}} <br />
+            <div class="ticket-response" *ngIf="t.response">
+                {{t.response}}
+            </div>
+            <button class="ticket-button" (click)="onCloseTicket(t.id)">Close the ticket</button>
+            <hr>
+      </div>
+  </div>
+</div>

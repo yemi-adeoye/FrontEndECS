@@ -1,0 +1,32 @@
+ <div class="container" id="container">
+
+	<div class="form-container sign-in-container">
+		<form (submit)="onFormSubmit()" [formGroup]="loginForm">
+			<span class="title">Login</span>
+        <br />
+			<span>
+        {{msg}}
+      </span>
+      <input type="email" placeholder="Enter Email" name="email" formControlName="email">
+      <input type="password" placeholder="Enter Password" name="password" formControlName="password">
+			<a routerLink="/forgot-password">Forgot your password?</a>
+			<input type="submit"  class="login_button" value="Login" [disabled]="!loginForm.valid">
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Incedo </h1>
+				<p>If you are a new employee, sign up to gain access to the App.</p>
+				<button class="ghost" id="signUp" routerLink="/sign-up">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+

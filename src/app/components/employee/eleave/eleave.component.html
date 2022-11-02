@@ -1,0 +1,58 @@
+<div class="main-content">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Leave Application</h4>
+                      <p class="card-category">Apply for leave</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="alert alert-success" *ngIf="leaveMsg">
+                      <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                      </button>
+                      <span>
+                          <b> {{leaveMsg}} </b></span>
+                  </div>
+                    <form [formGroup]="leaveForm" (submit)="onApplyLeave()">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label>Select from date:</label>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Choose a date</mat-label>
+                          <input matInput [matDatepickerFilter]="myFilter" formControlName="from" [matDatepicker]="picker">
+                          <mat-hint>MM/DD/YYYY</mat-hint>
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <label>Select to date:</label>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Choose a date</mat-label>
+                          <input matInput formControlName="to" [matDatepickerFilter]="myFilter1" [matDatepicker]="picker1">
+                          <mat-hint>MM/DD/YYYY</mat-hint>
+                          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <label>Number of Days: </label>
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Days" formControlName="numDays" type="text">
+                        </mat-form-field>
+                      </div>
+                  </div>
+                  <input mat-raised-button type="submit" class="btn btn-danger pull-right" value="Apply Leave" [disabled]="!leaveForm.valid">
+
+                           <div class="clearfix"></div>
+                </form>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>
+

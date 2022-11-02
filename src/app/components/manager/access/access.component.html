@@ -1,0 +1,11 @@
+<div class="ticket-form">
+  <div class="form-header">
+      <h2>Grant Employee Access</h2>
+      <div *ngFor="let e of employees">
+          Name: {{e.name}}, Job Title: {{e.jobTitle}} <br />
+          <button (click)="grantAccess(e.email)">Grant Access</button>
+          <br /><br />
+      </div>
+  </div>
+
+</div>

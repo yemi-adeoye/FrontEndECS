@@ -1,0 +1,55 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Employee Tickets</h4>
+                      <p class="card-category">Open tickets awaiting responses</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="alert alert-success" *ngIf="msg">
+                      <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                      </button>
+                      <span>
+                          <b> {{msg}} </b></span>
+                  </div>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+      <mat-card *ngFor="let t of tickets">
+        <mat-card-title>Ticket raised by: {{t.name}}  </mat-card-title>
+        <mat-card-subtitle>Priority: {{t.priority}}</mat-card-subtitle>
+        <mat-card-subtitle>Generated Date: {{t.generatedDate}}</mat-card-subtitle>
+        <mat-card-subtitle>Issue: {{t.issue}}</mat-card-subtitle>
+        <ng-container *ngIf="t.response; else templateA">
+        {{t.response}}
+      </ng-container>
+       <ng-template  #templateA>
+        <div class="col-md-12">
+          <label>Response: </label>
+          <mat-form-field class="example-full-width">
+             <textarea matInput  [(ngModel)]="response" placeholder="please enter the response here.."></textarea>
+           </mat-form-field>
+
+        </div>
+       </ng-template>
+        <mat-card-actions align="end">
+          <button mat-button (click)="onSubmitResponse(t.id)">Submit Response</button>
+
+        </mat-card-actions>
+      </mat-card>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+
+

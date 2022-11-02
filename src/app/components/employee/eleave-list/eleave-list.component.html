@@ -1,0 +1,58 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Leave Lists</h4>
+                      <p class="card-category"> List of Leaves Applied for Current Year</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      Sr. No
+                                  </th>
+                                  <th>
+                                      From Date
+                                  </th>
+                                  <th>
+                                      To Date
+                                  </th>
+                                  <th>
+                                      Number of Days
+                                  </th>
+                                  <th>
+                                      Status
+                                  </th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let l of leaves; let i=index;">
+                                      <td>
+                                          {{i+1}}
+                                      </td>
+                                      <td>
+                                         {{l.from}}
+                                      </td>
+                                      <td>
+                                        {{l.to}}
+                                      </td>
+                                      <td>
+                                          {{l.days}}
+                                      </td>
+                                      <td class="text-primary">
+                                          {{l.status}}
+                                      </td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+ <div class="container" >
+  <div class="overlay-container">
+		<div class="overlay">
+
+			<div class="overlay-panel overlay-right">
+				<h1>Incedo </h1>
+				<p>If you already have an account, Login Here</p>
+ 				<button class="ghost" routerLink="/login" >Login</button>
+			</div>
+		</div>
+	</div>
+	<div class="form-container">
+		<form (submit)="onFormSubmit()" [formGroup]="signUpForm">
+			<span class="title">Create Account</span>
+      <br />
+			<span> {{msg}}</span>
+			<input type="text" placeholder="Name" formControlName="name" />
+      <span *ngIf="signUpForm.controls['name'].invalid && signUpForm.controls['name'].touched">
+        <span *ngIf="signUpForm.controls['name'].errors['required']">Name is required</span>
+        <span *ngIf="signUpForm.controls['name'].errors['pattern']">No special chars are allowed</span>
+      </span>
+      <select class="form-input" formControlName="jobTitle"  >
+        <option value="" disabled selected>Select job title</option>
+        <option value="{{j}}" *ngFor="let j of jobTitles">{{j}}</option>
+      </select>
+      <span *ngIf="signUpForm.controls['jobTitle'].invalid && signUpForm.controls['jobTitle'].touched">
+        <span *ngIf="signUpForm.controls['jobTitle'].errors['required']">JobTitle is required</span>
+       </span>
+       <select class="form-input" formControlName="managerEmail">
+        <option value="" disabled selected>Select your manager</option>
+        <option *ngFor="let m of managers" value="{{m.email}}">{{m.name}}</option>
+      </select>
+      <span *ngIf="signUpForm.controls['managerEmail'].invalid && signUpForm.controls['managerEmail'].touched">
+        <span *ngIf="signUpForm.controls['managerEmail'].errors['required']">Manager is required</span>
+       </span>
+			<input type="email" placeholder="Email" formControlName="email" formControlName="email" />
+			<span *ngIf="signUpForm.controls['email'].invalid && signUpForm.controls['email'].touched">
+        <span *ngIf="signUpForm.controls['email'].errors['required']">Email is required</span>
+        <span *ngIf="signUpForm.controls['email'].errors['pattern']">Enter valid email. Only incedo and gmail IDs are allowed</span>
+      </span>
+
+      <input type="password" placeholder="Password" formControlName="password"/>
+      <span *ngIf="signUpForm.controls['password'].invalid && signUpForm.controls['password'].touched">
+        <span *ngIf="signUpForm.controls['password'].errors['required']">Password is required</span>
+        <span *ngIf="signUpForm.controls['password'].errors['minlength']">Password should be minimum 5 characters</span>
+        <span *ngIf="signUpForm.controls['password'].errors['pattern']">Characters allowed: [a-zA-Z0-9 _#]</span>
+      </span>
+      <input type="password" placeholder="Re-Password" formControlName="repassword"/>
+      <span *ngIf="signUpForm.controls['password'].invalid && signUpForm.controls['password'].touched">
+        <span *ngIf="signUpForm.controls['repassword'].invalid && signUpForm.controls['repassword'].touched">
+          <span *ngIf="signUpForm.controls['repassword'].errors['required']">Re-password is required</span>
+      </span>
+      </span>
+			<input type="submit" class="login_button" value="Sign Up" [disabled]="!signUpForm.valid"  >
+		</form>
+	</div>
+
+
+</div>
+

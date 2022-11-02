@@ -1,0 +1,32 @@
+<div class="ticket-form">
+  <div class="form-header">
+      <h2>Generate Ticket</h2>
+  </div>
+  <div class="error-msg">
+      {{msg}}
+  </div>
+  <div class="form-container">
+      <form (submit)="onIssueSubmit()" [formGroup]="ticketForm" >
+          <div>
+              <textarea formControlName="issue"  rows="8" cols="50" placeholder="Add Issue in detail"></textarea>
+          </div>
+          <span *ngIf="ticketForm.controls['issue'].invalid && ticketForm.controls['issue'].touched">
+            <small *ngIf="ticketForm.controls['issue'].errors['required']">Please enter the Issue</small>
+           </span>
+          <br />
+          <div >
+              <label><p>Select Priority:</p> </label>
+              <select formControlName="priority" name="priority" style="width: 100%;">
+                  <option *ngFor="let p of priority" value="{{p}}">{{p}}</option>
+              </select>
+          </div>
+          <span *ngIf="ticketForm.controls['priority'].invalid && ticketForm.controls['priority'].touched">
+            <small *ngIf="ticketForm.controls['priority'].errors['required']">Please select the priority</small>
+           </span>
+          <br />
+          <div>
+              <input type="submit" value="Generate Ticket" [disabled]="!ticketForm.valid">
+          </div>
+      </form>
+  </div>
+</div>

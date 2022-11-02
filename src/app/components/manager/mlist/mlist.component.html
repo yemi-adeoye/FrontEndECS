@@ -1,0 +1,60 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Employee Details</h4>
+                      <p class="card-category"> All Employee List</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      Sr. No
+                                  </th>
+                                  <th>
+                                      Name
+                                  </th>
+                                  <th>
+                                      Job Title
+                                  </th>
+                                  <th>
+                                      Leaves Left
+                                  </th>
+                                  <th>
+                                      Email
+                                  </th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let e of employees; let i=index;">
+                                      <td>
+                                          {{i+1}}
+                                      </td>
+                                      <td>
+                                         {{e.name}}
+                                      </td>
+                                      <td>
+                                        {{e.jobTitle}}
+                                      </td>
+                                      <td>
+                                          {{e.leavesLeft}}
+                                      </td>
+                                      <td class="text-primary">
+                                          {{e.email}}
+                                      </td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+

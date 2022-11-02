@@ -1,0 +1,22 @@
+<div class="form-header">
+  <h2>Open Tickets</h2>
+  <div>
+    {{msg}}
+  </div>
+  <div *ngFor="let t of tickets">
+
+      Ticket raised by: {{t.email}}, on {{t.generatedDate}}
+      &nbsp;&nbsp;&nbsp; Priority: {{t.priority}}<br>
+      Issue: {{t.issue}} <br />
+      <label>Any solution for this?</label><br />
+      <ng-container *ngIf="t.response; else templateA">
+        {{t.response}}
+      </ng-container>
+       <ng-template  #templateA>
+        <textarea cols="80" rows="2" [(ngModel)]="response"></textarea>
+        <br><button (click)="onSubmitResponse(t.id)">Submit Response</button>
+      </ng-template>
+
+      <hr>
+    </div>
+</div>

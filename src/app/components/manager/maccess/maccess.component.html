@@ -1,0 +1,70 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Employee Grant Access</h4>
+                      <p class="card-category"> Grant access to Employees</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="alert alert-success" *ngIf="msg">
+                      <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                      </button>
+                      <span>
+                          <b> {{msg}} </b></span>
+                  </div>
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      Sr. No
+                                  </th>
+                                  <th>
+                                      Name
+                                  </th>
+                                  <th>
+                                      Job Title
+                                  </th>
+
+                                  <th>
+                                      Email
+                                  </th>
+                                  <th>
+
+                                </th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let e of employees; let i=index;">
+                                      <td>
+                                          {{i+1}}
+                                      </td>
+                                      <td>
+                                         {{e.name}}
+                                      </td>
+                                      <td>
+                                        {{e.jobTitle}}
+                                      </td>
+
+                                      <td class="text-primary">
+                                          {{e.email}}
+                                      </td>
+                                      <td>
+                                        <button (click)="grantAccess(e.email)" class="btn btn-primary pull-right">Grant Access</button>
+                                    </td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>
+
+
+

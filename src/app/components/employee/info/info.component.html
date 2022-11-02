@@ -1,0 +1,22 @@
+<div class="sidebar">
+  <div class="avatar">
+      <img src="https://s.gravatar.com/avatar/34fce8ee32f3da1e0448?s=200">
+  </div>
+  <div class="info">
+          <span >Welcome {{employee?.name}}</span>
+          <br />
+          <span>Job TItle: {{employee?.jobTitle}}</span>
+          <br />
+          <span>Manager: {{employee?.managerName}}</span>
+          <br />
+          <span>Email: {{employee?.email}}</span>
+          <br />
+          <span>Total Leaves Granted: {{employee?.totalLeaves}}</span>
+          <br />
+          <span>Leaves Unused: {{employee?.leavesLeft}}</span>
+  </div>
+  <br />
+  <div class="logout" style="margin-bottom: 0;">
+          <button (click)="onLogout()">Logout</button>
+  </div>
+</div>

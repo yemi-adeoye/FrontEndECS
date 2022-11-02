@@ -1,0 +1,24 @@
+<div class="sidebar">
+  <div class="avatar">
+      <img src="https://s.gravatar.com/avatar/34fca7b482454596be8ee32f3da1e0448?s=200">
+  </div>
+  <div class="info">
+          <span >Welcome {{manager?.name}}</span>
+          <br />
+          <span>JobTitle: {{manager?.jobTitle}}</span>
+          <br />
+
+          <span>Email: {{manager?.email}}</span>
+
+          <hr>
+          <h4>Employee List </h4>
+          <ol>
+              <li *ngFor="let e of employees">
+                {{e.name}} , {{e.jobTitle}}
+              </li>
+          </ol>
+
+          <hr>
+          <button (click)="onLogout()">Logout</button>
+  </div>
+</div>

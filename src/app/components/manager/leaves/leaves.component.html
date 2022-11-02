@@ -1,0 +1,20 @@
+<div class="ticket-form">
+  <div class="form-header">
+      <h2>Pending Leaves</h2>
+  </div>
+  <div *ngIf="msg"> {{msg}}</div>
+  <div *ngFor="let l of leaves">
+      Emp. Name: {{l.name}} &nbsp;&nbsp;
+      From: {{l.from.split("T",2)[0]}} &nbsp;&nbsp; TO: {{l.to.split("T",2)[0]}}
+      &nbsp;&nbsp; Days: {{l.days}} &nbsp;&nbsp;
+      Leaves Left: {{l.leavesLeft}}  <br >
+      &nbsp;&nbsp;<button (click)="onLeaveClick('APPROVED',l.id, l.email)">APPROVE</button>&nbsp;&nbsp;
+      <button (click)="onLeaveClick('DENIED',l.id, l.email)">DENY</button>
+      <br />
+      <hr>
+  </div>
+  <div *ngIf="showCommentBox"><textarea placeholder="Enter reason for denial" rows="3" cols="25" [(ngModel)]="response"> </textarea>
+  <br />
+  <button (click)="onLeaveDeny()">Submit</button>
+  </div>
+</div>

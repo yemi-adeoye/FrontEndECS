@@ -1,0 +1,73 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Ticket Lists</h4>
+                      <p class="card-category"> List of OPEN Tickets</p>
+                  </div>
+                  <div class="card-body">
+                    <div class="alert alert-success" *ngIf="msg">
+                      <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <i class="material-icons">close</i>
+                      </button>
+                      <span>
+                          <b> {{msg}} </b></span>
+                  </div>
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      Sr. No
+                                  </th>
+                                  <th>
+                                      Issue
+                                  </th>
+                                  <th>
+                                      Priority
+                                  </th>
+                                  <th>
+                                      Response
+                                  </th>
+                                  <th>
+                                      Status
+                                  </th>
+                                  <th>
+
+                                  </th>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let t of tickets; let i=index;">
+                                      <td>
+                                          {{i+1}}
+                                      </td>
+                                      <td>
+                                         {{t.issue}}
+                                      </td>
+                                      <td>
+                                        {{t.priority}}
+                                      </td>
+                                      <td>
+                                          {{t.response}}
+                                      </td>
+                                      <td class="text-primary">
+                                          {{t.status}}
+                                      </td>
+                                      <td >
+                                        <button (click)="onStatusUpdate(t.id)" class="btn btn-warning">Close Ticket</button> &nbsp;&nbsp;
+
+                                      </td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</div>
+

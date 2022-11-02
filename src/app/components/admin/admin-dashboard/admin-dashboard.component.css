@@ -1,0 +1,20 @@
+input[type=text]{
+  width: 80% !important;
+}
+.btn{
+  border: 1px solid #ccc !important;
+
+}
+
+th, td{
+  text-align: center;
+}
+
+#left{
+  text-align: left;
+}
+
+.right{
+  position: absolute;
+  left: 95%;
+}
