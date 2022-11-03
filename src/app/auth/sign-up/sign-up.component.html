@@ -26,9 +26,17 @@
       <span *ngIf="signUpForm.controls['jobTitle'].invalid && signUpForm.controls['jobTitle'].touched">
         <span *ngIf="signUpForm.controls['jobTitle'].errors['required']">JobTitle is required</span>
        </span>
-       <select class="form-input" formControlName="managerEmail">
+       <select class="form-input" formControlName="role" (change)="handleManagerAdminView($event)">
+        <option value="" disabled selected>Select your role</option>
+        <option *ngFor="let r of role" value="{{r|uppercase}}">{{r}}</option>
+      </select>
+       <select *ngIf="showManagers" class="form-input" formControlName="managerEmail">
         <option value="" disabled selected>Select your manager</option>
         <option *ngFor="let m of managers" value="{{m.email}}">{{m.name}}</option>
+      </select>
+      <select *ngIf="showAdmins" class="form-input" formControlName="adminName" (change)="onAdminChange()">
+        <option value="" disabled selected>Select an admin</option>
+        <option *ngFor="let a of admins" value="{{a.name}}">{{a.name}}</option>
       </select>
       <span *ngIf="signUpForm.controls['managerEmail'].invalid && signUpForm.controls['managerEmail'].touched">
         <span *ngIf="signUpForm.controls['managerEmail'].errors['required']">Manager is required</span>
@@ -45,7 +53,7 @@
         <span *ngIf="signUpForm.controls['password'].errors['minlength']">Password should be minimum 5 characters</span>
         <span *ngIf="signUpForm.controls['password'].errors['pattern']">Characters allowed: [a-zA-Z0-9 _#]</span>
       </span>
-      <input type="password" placeholder="Re-Password" formControlName="repassword"/>
+      <input type="password" placeholder="Re-Password" formControlName="repassword" (blur)="onAdminChange()"/>
       <span *ngIf="signUpForm.controls['password'].invalid && signUpForm.controls['password'].touched">
         <span *ngIf="signUpForm.controls['repassword'].invalid && signUpForm.controls['repassword'].touched">
           <span *ngIf="signUpForm.controls['repassword'].errors['required']">Re-password is required</span>

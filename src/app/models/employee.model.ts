@@ -11,5 +11,6 @@ export class Employee{
   managerId?: string;
   leavesLeft? : number;
   totalLeaves? : number;
+  adminName?: string;
 
 }

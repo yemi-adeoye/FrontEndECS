@@ -6,10 +6,12 @@ import { Login } from '../models/login.model';
 import { UserInfo } from '../models/user.model';
 import {environment} from '../../environments/environment';
 import { Manager } from '../models/manager.model';
+import { Admin } from '../models/admin.model';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
 
   msg$ = new BehaviorSubject<string>('');
 
@@ -27,11 +29,15 @@ export class UserService {
   }
 
   public signUp(employee: Employee) :Observable<any>{
-    return this.http.post<any>(environment.serverUrl + '/employee/add', employee);
+    return this.http.post<any>(environment.serverUrl + '/user/signup', employee);
   }
 
   public getAllManagers():Observable<Manager[]> {
     return this.http.get<Manager[]>(environment.serverUrl +'/manager/all');
+  }
+
+  public getAllAdmins():Observable<any> {
+    return this.http.get<any>(environment.serverUrl +'/admin/all');
   }
 
 
