@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Employee } from 'src/app/models/employee.model';
+import { Manager } from 'src/app/models/manager.model';
+import { UserInfo } from 'src/app/models/user.model';
+import { AdminServiceService } from 'src/app/services/admin-service.service';
 import { ManagerService } from 'src/app/services/manager.service';
 import { UserService } from 'src/app/services/user.service';
+import { AdminService } from '../../admin/admin-service';
 
 @Component({
   selector: 'app-mlist',
@@ -12,15 +16,57 @@ import { UserService } from 'src/app/services/user.service';
 export class MlistComponent implements OnInit {
 
   employees: Employee[];
-  constructor(private managerService: ManagerService, private userService: UserService,
-    private router:Router) { }
+  managers: Manager[];
+  user: UserInfo;
+
+  constructor(private managerService: ManagerService,
+    private userService: UserService,
+    private adminService: AdminServiceService,
+    private router: Router) { }
+
+  setRole = (userInfo) => {
+    this.user = userInfo;
+  }
 
   ngOnInit(): void {
+    const token: string = localStorage.getItem('token');
 
-    this.managerService.getAllEmployees(localStorage.getItem('token'))
-      .subscribe({
-        next: (data)=>{this.employees = data}
-      });
+    // determine user role. If admin, get all employees and managers, else get empl
+    // by manager
+    this.userService.getUser(token).subscribe({
+      next: (data,) => {
+        console.log(data);
+        this.user = data;
+
+        if (this.user.role == "MANAGER") {
+          this.managerService.getAllEmployees(token)
+
+            .subscribe({
+              next: (data) => { this.employees = data }
+            });
+        }
+
+        if (this.user.role == "ADMIN") {
+          this.adminService.getAllEmployees(localStorage.getItem('token'))
+
+            .subscribe({
+              next: (data) => { this.employees = data }
+            });
+        }
+
+        // get all managers too
+        this.adminService.getAllManagers(localStorage.getItem('token'))
+
+            .subscribe({
+              next: (data) => { this.managers = data }
+            });
+      },
+      error: () => {
+
+      }
+    })
+
+
   }
 
 }

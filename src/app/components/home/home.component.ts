@@ -15,14 +15,18 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUser(localStorage.getItem('token')).subscribe({
       next: (data)=>{
+        console.log(data)
         this.user = data;
         if(this.user.role === 'EMPLOYEE'){
               this.router.navigateByUrl('/employee');
         }
         else if (this.user.role == 'ADMIN'){
             this.router.navigateByUrl('/admin');
-        }else{
+        }else if (this.user.role == 'MANAGER'){
             this.router.navigateByUrl('/manager');
+        }else{
+          // developer message
+          console.log("No role found for user");
         }
 
       },

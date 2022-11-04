@@ -26,6 +26,15 @@ export const ROUTES1: RouteInfo[] = [
    { path: '/logout', title: 'Logout',  icon:'unarchive', class: 'active-pro' },
 ];
 
+export const ROUTES_ADMIN: RouteInfo[] = [
+  { path: '/admin', title: 'Admin Dashboard',  icon:'person', class: '' },
+  { path: '/admin/access', title: 'Access Grants',  icon:'bubble_chart', class: '' },
+  { path: '/admin/ticket', title: 'All Tickets',  icon:'content_paste', class: '' },
+ { path: '/admin/leave', title: 'All Pending Leaves',  icon:'library_books', class: '' },
+ { path: '/admin/load-file', title: 'Load File',  icon:'create_new_folder', class: '' },
+   { path: '/logout', title: 'Logout',  icon:'unarchive', class: 'active-pro' },
+];
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -45,8 +54,16 @@ export class SidebarComponent implements OnInit {
         if(this.user.role === 'EMPLOYEE'){
           this.menuItems = ROUTES.filter(menuItem => menuItem);
         }
-         else
-         this.menuItems = ROUTES1.filter(menuItem => menuItem);
+         else if (this.user.role === 'MANAGER'){
+          this.menuItems = ROUTES1.filter(menuItem => menuItem);
+         }
+         else if (this.user.role === 'ADMIN'){
+          this.menuItems = ROUTES_ADMIN.filter(menuItem => menuItem);
+         }else{
+          // dev-info
+          console.log("no valid route: something is wrong")
+         }
+
       },
       error: (error)=>{
           this.userService.msg$.next(error.error.msg);

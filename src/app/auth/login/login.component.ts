@@ -58,7 +58,14 @@ export class LoginComponent implements OnInit,OnDestroy {
           this.router.navigateByUrl('/home');
         },
       error: (error)=>{
-          this.msg = `${error.error.message}. User doesn't exist` ;
+        if(error.error.msg){
+          // error from auth login method
+          this.msg = `${error.error.msg}` ;
+        }else{
+          // error from spring security
+          console.log(error)
+          this.msg = `${error.error.error}` ;
+        }
       }
      }));
   }

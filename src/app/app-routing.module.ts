@@ -4,7 +4,9 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { LoginComponent } from './auth/login/login.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { AdashboardComponent } from './components/admin/adashboard/adashboard.component';
 import { AdminDashboardComponent } from './components/admin/admin-dashboard/admin-dashboard.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { EdashboardComponent } from './components/employee/edashboard/edashboard.component';
 import { EleaveListComponent } from './components/employee/eleave-list/eleave-list.component';
 import { EleaveComponent } from './components/employee/eleave/eleave.component';
@@ -26,7 +28,14 @@ import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {path:'', redirectTo:'login', pathMatch:'full' },
-  {path: 'admin', component: AdminDashboardComponent},
+  {path: 'admin', component: AdashboardComponent, children:[
+    {path: '', component: MlistComponent},
+    {path: 'ticket', component: MticketComponent},
+    {path: 'leave', component: MleavesComponent},
+    {path: 'access', component: MaccessComponent},
+    {path: 'load-file', component: AdminDashboardComponent},
+
+  ]},
   {path:'login', component: LoginComponent},
   {path:'sign-up', component: SignUpComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
@@ -37,6 +46,7 @@ const routes: Routes = [
     {path: 'leave', component: EleaveComponent},
     {path: 'ticket-list', component: EticketListComponent},
     {path: 'leave-list', component: EleaveListComponent},
+
   ]},
   //{path: 'employee',component: EmployeeComponent, canActivate: [AuthGuardService]},
   //{path:'manager', component: ManagerComponent, canActivate: [AuthGuardService]},

@@ -46,6 +46,8 @@ import {MatCardModule} from '@angular/material/card';
 import { LogoutComponent } from './components/logout/logout.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdashboardComponent } from './components/admin/adashboard/adashboard.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     MlistComponent,
     LogoutComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    AdminComponent,
+    AdashboardComponent
 
   ],
   imports: [

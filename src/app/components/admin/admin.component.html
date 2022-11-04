@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="dashboard">
+          <div class="fb-cell fb-cell--1">
+              <div class="fb-item">
+                <!-- info component goes here -->
+                <app-manager-info [manager]="admin" [employees]="employees"></app-manager-info>
+              </div>
+          </div>
+          <div class="fb-cell fb-cell--2">
+              <div class="fb-item">
+                  <!-- access component goes here -->
+                <app-manager-access [employees]="employeeNoAccess" (grant)="grantAccess($event)"></app-manager-access>
+              </div>
+          </div>
+          <div class="fb-cell fb-cell--3">
+              <div class="fb-item">
+                  <!-- leaves component goes here -->
+                  <app-manager-leaves [leaves]="leaves"></app-manager-leaves>
+              </div>
+          </div>
+          <div class="fb-cell fb-cell--4">
+              <div class="fb-item">
+                <!-- ticket component goes here -->
+                <app-manager-ticket></app-manager-ticket>
+              </div>
+          </div>
+  </div>
+</div>
