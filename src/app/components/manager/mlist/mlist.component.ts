@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Admin } from 'src/app/models/admin.model';
 import { Employee } from 'src/app/models/employee.model';
 import { Manager } from 'src/app/models/manager.model';
 import { UserInfo } from 'src/app/models/user.model';
@@ -17,6 +18,7 @@ export class MlistComponent implements OnInit {
 
   employees: Employee[];
   managers: Manager[];
+  admins: Admin[]
   user: UserInfo;
 
   constructor(private managerService: ManagerService,
@@ -34,8 +36,7 @@ export class MlistComponent implements OnInit {
     // determine user role. If admin, get all employees and managers, else get empl
     // by manager
     this.userService.getUser(token).subscribe({
-      next: (data,) => {
-        console.log(data);
+      next: (data) => {
         this.user = data;
 
         if (this.user.role == "MANAGER") {
@@ -52,21 +53,32 @@ export class MlistComponent implements OnInit {
             .subscribe({
               next: (data) => { this.employees = data }
             });
+
+            // get all managers too
+          this.adminService.getAllManagers(localStorage.getItem('token'))
+
+          .subscribe({
+            next: (data) => { console.log(data)
+              this.managers = data },
+            error: () => {}
+          });
+
+          // and all admins
+          this.adminService.getAllAdmins(localStorage.getItem('token'))
+
+          .subscribe({
+            next: (data) => {
+              console.log(data)
+              this.admins = data },
+            error: () => {}
+          });
         }
-
-        // get all managers too
-        this.adminService.getAllManagers(localStorage.getItem('token'))
-
-            .subscribe({
-              next: (data) => { this.managers = data }
-            });
       },
-      error: () => {
+      error: (error) => {
 
       }
+
     })
 
-
   }
-
 }

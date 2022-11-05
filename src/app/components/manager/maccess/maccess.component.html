@@ -1,70 +1,222 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title ">Employee Grant Access</h4>
-                      <p class="card-category"> Grant access to Employees</p>
-                  </div>
-                  <div class="card-body">
-                    <div class="alert alert-success" *ngIf="msg">
-                      <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <i class="material-icons">close</i>
-                      </button>
-                      <span>
-                          <b> {{msg}} </b></span>
-                  </div>
-                      <div class="table-responsive">
-                          <table class="table">
-                              <thead class=" text-primary">
-                                  <th>
-                                      Sr. No
-                                  </th>
-                                  <th>
-                                      Name
-                                  </th>
-                                  <th>
-                                      Job Title
-                                  </th>
-
-                                  <th>
-                                      Email
-                                  </th>
-                                  <th>
-
-                                </th>
-                              </thead>
-                              <tbody>
-                                  <tr *ngFor="let e of employees; let i=index;">
-                                      <td>
-                                          {{i+1}}
-                                      </td>
-                                      <td>
-                                         {{e.name}}
-                                      </td>
-                                      <td>
-                                        {{e.jobTitle}}
-                                      </td>
-
-                                      <td class="text-primary">
-                                          {{e.email}}
-                                      </td>
-                                      <td>
-                                        <button (click)="grantAccess(e.email)" class="btn btn-primary pull-right">Grant Access</button>
-                                    </td>
-                                  </tr>
-
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Employee Grant Access</h4>
+            <p class="card-category">Grant access to Employees</p>
           </div>
+          <div class="card-body">
+            <div class="alert alert-success" *ngIf="msg">
+              <button
+                mat-button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <i class="material-icons">close</i>
+              </button>
+              <span>
+                <b> {{ msg }} </b></span
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <th>Sr. No</th>
+                  <th>Name</th>
+                  <th>Job Title</th>
 
+                  <th>Email</th>
+                  <th *ngIf="role == 'ADMIN'">Access Level</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let e of employees; let i = index">
+                    <td>
+                      {{ i + 1 }}
+                    </td>
+                    <td>
+                      {{ e.name }}
+                    </td>
+                    <td>
+                      {{ e.jobTitle }}
+                    </td>
+
+                    <td class="text-primary">
+                      {{ e.email }}
+                    </td>
+                    <td class="text-primary" *ngIf="role == 'ADMIN'">
+                      <select
+                        id="{{ e.email }}"
+                        (change)="updateUserAccessMap($event)"
+                      >
+                        <option VALUE="">Select an access level</option>
+                        <option
+                          *ngFor="let level of levels"
+                          value="{{ level | uppercase }}"
+                        >
+                          {{ level }}
+                        </option>
+                      </select>
+                    </td>
+                    <td>
+                      <button
+                        (click)="grantAccess(e.email)"
+                        class="btn btn-primary pull-right"
+                      >
+                        Grant Access
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="col-md-12" *ngIf="managers">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Manager Grant Access</h4>
+            <p class="card-category">Grant access to Managers</p>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-success" *ngIf="msg">
+              <button
+                mat-button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <i class="material-icons">close</i>
+              </button>
+              <span>
+                <b> {{ msg }} </b></span
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <th>Sr. No</th>
+                  <th>Name</th>
+                  <th>Job Title</th>
+
+                  <th>Email</th>
+                  <th *ngIf="role == 'ADMIN'">Access Level</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let e of managers; let i = index">
+                    <td>
+                      {{ i + 1 }}
+                    </td>
+                    <td>
+                      {{ e.name }}
+                    </td>
+                    <td>
+                      {{ e.jobTitle }}
+                    </td>
+
+                    <td class="text-primary">
+                      {{ e.email }}
+                    </td>
+                    <td class="text-primary" *ngIf="role == 'ADMIN'">
+                      <select
+                        id="{{ e.email }}"
+                        (change)="updateUserAccessMap($event)"
+                      >
+                        <option VALUE="">Select an access level</option>
+                        <option
+                          *ngFor="let level of levels"
+                          value="{{ level | uppercase }}"
+                        >
+                          {{ level }}
+                        </option>
+                      </select>
+                    </td>
+                    <td>
+                      <button
+                        (click)="grantAccess(e.email)"
+                        class="btn btn-primary pull-right"
+                      >
+                        Grant Access
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12" *ngIf="admins">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Admin Grant Access</h4>
+            <p class="card-category">Grant access to Admins</p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <th>Sr. No</th>
+                  <th>Name</th>
+                  <th>Job Title</th>
+
+                  <th>Email</th>
+                  <th *ngIf="role == 'ADMIN'">Access Level</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let e of admins; let i = index">
+                    <td>
+                      {{ i + 1 }}
+                    </td>
+                    <td>
+                      {{ e.name }}
+                    </td>
+                    <td>
+                      {{ e.jobTitle }}
+                    </td>
+
+                    <td class="text-primary">
+                      {{ e.email }}
+                    </td>
+                    <td class="text-primary" *ngIf="role == 'ADMIN'">
+                      <select
+                        id="{{ e.email }}"
+                        (change)="updateUserAccessMap($event)"
+                      >
+                        <option VALUE="">Select an access level</option>
+                        <option
+                          *ngFor="let level of levels"
+                          value="{{ level | uppercase }}"
+                        >
+                          {{ level }}
+                        </option>
+                      </select>
+                    </td>
+                    <td>
+                      <button
+                        (click)="grantAccess(e.email)"
+                        class="btn btn-primary pull-right"
+                      >
+                        Grant Access
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-
-
