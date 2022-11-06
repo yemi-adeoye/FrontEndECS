@@ -12,5 +12,6 @@ export class Employee{
   leavesLeft? : number;
   totalLeaves? : number;
   adminName?: string;
+  enabled?: boolean;
 
 }

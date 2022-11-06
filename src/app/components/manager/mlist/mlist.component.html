@@ -1,6 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
+
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-danger">
@@ -8,6 +9,22 @@
             <p class="card-category">All Employee List</p>
           </div>
           <div class="card-body">
+            <div id="alert-container" class="card-body">
+              <div id="alert" style="font:inherit;" class="alert alert-success" *ngIf="msg">
+                <button
+                  mat-button
+                  type="button"
+                  class="close"
+                  (click)="resetMsg()"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <i class="material-icons">close</i>
+                </button>
+                <span>
+                  <b> {{ msg }} </b></span
+                >
+              </div>
             <div class="table-responsive">
               <table class="table">
                 <thead class="text-primary">
@@ -16,6 +33,7 @@
                   <th>Job Title</th>
                   <th>Leaves Left</th>
                   <th>Email</th>
+                  <th>Revoke Access</th>
                 </thead>
                 <tbody>
                   <tr *ngFor="let e of employees; let i = index">
@@ -34,6 +52,15 @@
                     <td class="text-primary">
                       {{ e.email }}
                     </td>
+                    <td>
+                      <button
+                        *ngIf="e.enabled"
+                        (click)="revokeAccess(e.email)"
+                        class="btn btn-primary pull-left"
+                      >
+                        Revoke Access
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -41,6 +68,8 @@
           </div>
         </div>
       </div>
+      </div>
+
       <div class="col-md-12" *ngIf="managers">
         <div class="card">
           <div class="card-header card-header-danger">
@@ -55,6 +84,7 @@
                   <th>Name</th>
                   <th>Job Title</th>
                   <th>Email</th>
+                  <th>Revoke Access</th>
                 </thead>
                 <tbody>
                   <tr *ngFor="let e of managers; let i = index">
@@ -70,6 +100,15 @@
                     <td class="text-primary">
                       {{ e.email }}
                     </td>
+                    <td>
+                      <button
+                        *ngIf="e.enabled"
+                        (click)="revokeAccess(e.email)"
+                        class="btn btn-primary pull-left"
+                      >
+                        Revoke Access
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -77,6 +116,7 @@
           </div>
         </div>
       </div>
+
       <div class="col-md-12" *ngIf="admins">
         <div class="card">
           <div class="card-header card-header-danger">
@@ -91,6 +131,7 @@
                   <th>Name</th>
                   <th>Job Title</th>
                   <th>Email</th>
+                  <th>Revoke Access</th>
                 </thead>
                 <tbody>
                   <tr *ngFor="let e of admins; let i = index">
@@ -106,6 +147,15 @@
                     <td class="text-primary">
                       {{ e.email }}
                     </td>
+                    <td>
+                      <button
+                        *ngIf="e.enabled"
+                        (click)="revokeAccess(e.email)"
+                        class="btn btn-primary pull-left"
+                      >
+                        Revoke Access
+                      </button>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -113,6 +163,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

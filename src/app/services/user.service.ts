@@ -58,4 +58,8 @@ export class UserService {
      return this.http.post(environment.serverUrl + '/auth/reset-pass', user);
   }
 
+  revokeAccess(email: string, revokeAccessMessage: string): Observable<any> {
+      return this.http.put(environment.serverUrl + `/user/revoke-access/${email}`, {accessMessage: revokeAccessMessage});
+  }
+
 }

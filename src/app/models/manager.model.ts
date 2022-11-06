@@ -6,4 +6,5 @@ export class Manager{
   imageUrl?: string;
   jobTitle?:string;
   role?:string;
+  enabled?: boolean;
 }

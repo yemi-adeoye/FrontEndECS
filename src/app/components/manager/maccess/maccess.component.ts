@@ -32,12 +32,17 @@ export class MaccessComponent implements OnInit {
 
   }
 
+  resetMsg(){
+    this.msg = '';
+  }
+
   ngOnInit(): void {
     const alertContainer: any = document.getElementById('alert-container');
+
+    // checking to see when the alert is added to the container
     const watchOutFor: any = { childList: true };
 
     const observerCallback = (mutationList, observer) => {
-      console.log("child added")
       const alert = document.getElementById('alert');
 
       if (alert) {
