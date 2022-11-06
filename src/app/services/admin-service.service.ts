@@ -46,9 +46,9 @@ export class AdminServiceService {
     return this.http.get<Employee[]>(environment.serverUrl + '/employee/access-all', {headers: header});
   }
 
-  public grantAccess(email: string, accessLevel: string, token: string): Observable<Employee[]> {
+  public grantAccess(email: string, accessLevel: string, accessMessage: string, token: string): Observable<any> {
     const header = {'Authorization': 'Basic ' + token}
-    return this.http.post<Employee[]>(environment.serverUrl + '/admin/grant-access',{email, role: accessLevel}, {headers: header});
+    return this.http.post<any>(environment.serverUrl + '/admin/grant-access',{email, role: accessLevel, accessMessage}, {headers: header});
   }
 
   public fetchTickets(token: string) : Observable<Ticket[]>{

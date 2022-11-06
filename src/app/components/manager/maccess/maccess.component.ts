@@ -28,9 +28,32 @@ export class MaccessComponent implements OnInit {
   constructor(private managerService: ManagerService,
     private userService: UserService,
     private adminService: AdminServiceService,
-    private router: Router) { }
+    private router: Router) {
+
+  }
 
   ngOnInit(): void {
+    const alertContainer: any = document.getElementById('alert-container');
+    const watchOutFor: any = { childList: true };
+
+    const observerCallback = (mutationList, observer) => {
+      console.log("child added")
+      const alert = document.getElementById('alert');
+
+      if (alert) {
+        alert.style.position = 'absolute';
+        alert.style.width = '94%';
+        alert.style.top = (window.scrollY - alert.clientHeight - 80) + 'px';
+        alert.style.zIndex = '100';
+      }
+
+
+
+    }
+    const observer = new MutationObserver(observerCallback);
+
+    observer.observe(alertContainer, watchOutFor);
+
     const token = localStorage.getItem('token');
 
     this.userService.getUser(token).subscribe({
@@ -109,11 +132,13 @@ export class MaccessComponent implements OnInit {
 
   }
 
+
   grantAccess(email: string) {
     // a manager can only grant employee access
-    console.log(this.user.role)
+    const accessGrantMsg = window.prompt("Enter aditional access grant message.");
     if (this.user.role == 'MANAGER') {
-      this.managerService.grantAccess(email, localStorage.getItem('token'))
+      console.log(accessGrantMsg);
+      this.managerService.grantAccess(email, accessGrantMsg, localStorage.getItem('token'))
         .subscribe({
           next: (data) => {
             this.employees = this.employees.filter(e => e.email !== email);
@@ -126,13 +151,23 @@ export class MaccessComponent implements OnInit {
     if (this.user.role == 'ADMIN') {
       console.log(this.userAccessMap[email])
       const accessLevel = this.userAccessMap[email];
-      this.adminService.grantAccess(email, accessLevel, localStorage.getItem('token'))
+      this.adminService.grantAccess(email, accessLevel, accessGrantMsg, localStorage.getItem('token'))
 
         .subscribe({
           next: (data) => {
-            console.log(data)
-            /*this.employees = this.employees.filter(e => e.email !== email);
-            this.msg = "Access Granted to: " + email;*/
+            const email = data.data.username;
+            const accessLevel = data.data.role;
+            console.log(data.data.role)
+            if (accessLevel == 'EMPLOYEE') {
+              this.employees = this.employees.filter(e => e.email !== email);
+            } else if (accessLevel == 'MANAGER') {
+              this.managers = this.managers.filter(e => e.email !== email);
+            } else if (accessLevel == 'ADMIN') {
+              this.admins = this.admins.filter(e => e.email !== email);
+            }
+            this.msg = "Access Granted to: " + email;
+
+
           }
         });
     }

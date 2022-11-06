@@ -29,7 +29,7 @@ export class MticketComponent implements OnInit {
         this.user = data;
 
         if (this.user.role == "MANAGER") {
-          // FETCH LEAVES FOR SUBORDINATES OF GIVEN MANAGER
+          // FETCH TICKETS FOR SUBORDINATES OF GIVEN MANAGER
           this.managerService.fetchTickets(token)
             .subscribe({
               next: (data) => {

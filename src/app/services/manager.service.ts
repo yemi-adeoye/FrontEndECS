@@ -17,9 +17,9 @@ export class ManagerService {
     return this.http.get<Employee[]>(environment.serverUrl + '/employee/access', {headers: header});
   }
 
-  public grantAccess(email: string, token: string) : Observable<any>{
+  public grantAccess(email: string, accessGrantMsg: string, token: string) : Observable<any>{
    const header = {'Authorization': 'Basic ' + token}
-   return this.http.get<any>(environment.serverUrl +'/user/grant-access/'+ email, {headers: header});
+   return this.http.get<any>(environment.serverUrl +'/user/grant-access/'+ email + '/' + accessGrantMsg, {headers: header});
   }
 
   public fetchLeavesPending(token: string) : Observable<Leave[]>{

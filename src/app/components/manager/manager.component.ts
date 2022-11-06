@@ -58,7 +58,9 @@ export class ManagerComponent implements OnInit {
 
   /* Call API and grant access */
   grantAccess(email: string){
-      this.managerService.grantAccess(email, localStorage.getItem('token'))
+    const accessGrantMsg = window.prompt("Enter aditional access grant message.");
+
+      this.managerService.grantAccess(email, accessGrantMsg, localStorage.getItem('token'))
       .subscribe({
         next: (data)=>{
             this.employeeNoAccess = this.employeeNoAccess.filter(e=>e.email !== email);
