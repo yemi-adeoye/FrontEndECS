@@ -131,7 +131,6 @@ export class AdminDashboardComponent implements OnInit {
       employee = {...e};
       employees.push(employee);
     }
-    console.log(employees);
     const token = localStorage.getItem('token');
     this.managerService.sendEmployeeBatch(token, employees).subscribe((res)=>{
       console.log(res);
@@ -139,6 +138,8 @@ export class AdminDashboardComponent implements OnInit {
 
     this.msg = "CSV File loaded successfully";
     this.ngOnInit();
+    const elem: any = document.getElementById("file");
+    elem.value = '';
   }
 
   downloadCsv(): void{
