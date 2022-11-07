@@ -1,50 +1,74 @@
-<div class="container-fluid p-4">
 
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">
-        <input class="form-control mb-5" type="file" class="upload" (change)="readFile($event)">
-      </span>
-      <a class="right" routerLink="/">Logout</a>
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Batch Loading</h4>
+            <p class="card-category">Load Employee CSV</p>
+          </div>
+          <div class="card-body">
+            <div id="alert-container" class="card-body">
+              <div id="alert" style="font:inherit;" class="alert alert-success" *ngIf="msg">
+                <button
+                  mat-button
+                  type="button"
+                  class="close"
+                  (click)="resetMsg()"
+                  data-dismiss="alert"
+                  aria-label="Close"
+                >
+                  <i class="material-icons">close</i>
+                </button>
+                <span>
+                  <b> {{ msg }} </b></span
+                >
+              </div>
+            <div class="table-responsive">
+              <form class="table-responsive" [formGroup]="userForm" (submit)="submit()">
+                <table class="table">
+                  <thead class="text-primary">
+                    <tr>
+                      <th>NAME</th>
+                      <th>EMAIL</th>
+                      <th>PASSWORD</th>
+                      <th>JOB TITLE</th>
+                      <th>TOTAL LEAVES</th>
+                      <th>PENDING LEAVES</th>
+                      <th>MANAGER NAME</th>
+                      <th>*</th>
+                    </tr>
+                  </thead>
+                  <tbody class="all-user-rows"  formArrayName="userFormRows" *ngFor="let control of userFormRows.controls; let i = index">
+                    <tr [formGroupName]="i">
+                      <td><input type="text" id="{{'name-'+ i}}" formControlName="name"></td>
+                      <td><input type="text" id="{{'name-'+ i}}" formControlName="email"></td>
+                      <td><input type="text" id="{{'name-'+ i}}" formControlName="password" readonly></td>
+                      <td><input type="text" id="{{'name-'+ i}}" formControlName="jobTitle"></td>
+                      <td><input type="text" id="{{'name-'+ i}}" formControlName="totalLeaves" readonly></td>
+                      <td><input type="text" id="{{'name-'+ i}}" formControlName="leavesLeft"></td>
+                      <td><input type="text" id="{{'name-'+ i}}" formControlName="managerName" readonly></td>
+                      <td><button class='btn btn-primary' (click)="deleteUser($event)" id="{{i}}">Delete</button></td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="7" id="left"><button class='btn btn-primary pull left' (click)="addUser()">Add user</button></td>
+                     <td><input  class='btn btn-primary' type="submit" value="submit" [disabled]="userForm.invalid"></td>
+                    </tr>
+                  </tfoot>
+                </table>
+
+
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
   </div>
-
-
-<form class="table-responsive" [formGroup]="userForm" (submit)="submit()">
-<table class="table table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th>NAME</th>
-      <th>EMAIL</th>
-      <th>PASSWORD</th>
-      <th>JOB TITLE</th>
-      <th>TOTAL LEAVES</th>
-      <th>PENDING LEAVES</th>
-      <th>MANAGER NAME</th>
-      <th>*</th>
-    </tr>
-  </thead>
-  <tbody class="all-user-rows"  formArrayName="userFormRows" *ngFor="let control of userFormRows.controls; let i = index">
-    <tr [formGroupName]="i">
-      <td><input type="text" id="{{'name-'+ i}}" formControlName="name"></td>
-      <td><input type="text" id="{{'name-'+ i}}" formControlName="email"></td>
-      <td><input type="text" id="{{'name-'+ i}}" formControlName="password" readonly></td>
-      <td><input type="text" id="{{'name-'+ i}}" formControlName="jobTitle"></td>
-      <td><input type="text" id="{{'name-'+ i}}" formControlName="totalLeaves" readonly></td>
-      <td><input type="text" id="{{'name-'+ i}}" formControlName="leavesLeft"></td>
-      <td><input type="text" id="{{'name-'+ i}}" formControlName="managerName" readonly></td>
-      <td><button class='btn form-control' (click)="deleteUser($event)" id="{{i}}">Delete</button></td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="7" id="left"><button class='btn' (click)="addUser()">Add user</button></td>
-     <td><input  class='btn' type="submit" value="submit" [disabled]="userForm.invalid"></td>
-    </tr>
-  </tfoot>
-</table>
-
-
-</form>
-
 </div>

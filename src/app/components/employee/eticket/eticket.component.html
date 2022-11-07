@@ -9,7 +9,7 @@
                   </div>
                   <div class="card-body">
                     <div class="alert alert-success" *ngIf="msg">
-                      <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <button (click)="resetMsg()" mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <i class="material-icons">close</i>
                       </button>
                       <span>

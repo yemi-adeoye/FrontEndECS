@@ -49,6 +49,12 @@ export class EticketComponent implements OnInit {
         this.msg=error.error.msg;
       }
     });
+
+    this.ngOnInit();
+  }
+
+  resetMsg(){
+    this.msg = ''
   }
 
   ngOnDestroy(): void {

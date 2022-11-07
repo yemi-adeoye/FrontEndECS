@@ -39,7 +39,7 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'sign-up', component: SignUpComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService]},
-  {path: 'employee',component: EdashboardComponent, canActivate: [AuthGuardService]
+  {path: 'employee',component: EdashboardComponent//, //canActivate: [AuthGuardService]
   , children:[
     {path: '', component: EprofileComponent},
     {path: 'ticket', component: EticketComponent},
@@ -50,7 +50,7 @@ const routes: Routes = [
   ]},
   //{path: 'employee',component: EmployeeComponent, canActivate: [AuthGuardService]},
   //{path:'manager', component: ManagerComponent, canActivate: [AuthGuardService]},
-  {path:'manager', component: MdashboardComponent, canActivate: [AuthGuardService],
+  {path:'manager', component: MdashboardComponent, //canActivate: [AuthGuardService],
   children:[
     {path: '', component: MlistComponent},
     {path: 'ticket', component: MticketComponent},

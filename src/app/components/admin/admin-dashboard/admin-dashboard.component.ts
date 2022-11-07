@@ -12,7 +12,7 @@ import { ManagerService } from 'src/app/services/manager.service';
 export class AdminDashboardComponent implements OnInit {
 
   userForm: FormGroup;
-
+  msg : string;
   downloadReady: boolean = false;
   href: string = ''
 
@@ -30,6 +30,9 @@ export class AdminDashboardComponent implements OnInit {
     this.addUser();
   }
 
+  resetMsg(){
+    this.msg = ''
+  }
   // getter for userFormRows
   get userFormRows(): FormArray {
     return this.userForm.get("userFormRows") as FormArray;
@@ -134,7 +137,7 @@ export class AdminDashboardComponent implements OnInit {
       console.log(res);
     })
 
-    alert("CSV File loaded successfully")
+    this.msg = "CSV File loaded successfully";
     this.ngOnInit();
   }
 

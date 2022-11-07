@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Leave } from 'src/app/models/leave.model';
 import { EmployeeService } from 'src/app/services/employee.service';
+import * as moment from 'moment' ;
 
 @Component({
   selector: 'app-eleave',
@@ -29,13 +30,57 @@ export class EleaveComponent implements OnInit {
 
   constructor(private employeeService: EmployeeService) { }
 
-
-  ngOnInit(): void {
+  createLeaveForm = () => {
     this.leaveForm = new FormGroup({
-      from : new FormControl('', Validators.required),
-      to: new FormControl('', Validators.required),
+      from : new FormControl(Date.now.toString, [Validators.required, EleaveComponent.cannotBeEarlierThanToday]),
+      to: new FormControl('', [Validators.required,]),
       numDays: new FormControl('', Validators.required)
     });
+  }
+
+  static cannotBeEarlierThanToday(control: FormControl){
+    return new Date(control.value) >= new Date() ? null : {inValidStartDate: true}
+  }
+
+  static cannotBeEarlierThanStart = (control: FormControl): ValidatorFn => {
+    return (startDate) : ValidationErrors | null => {
+      if (new Date(control.value) < new Date(startDate.toString())){
+        return {invalidEndDate: true}
+      }
+      return null;
+    }
+
+  }
+
+  onDateChange(){
+    console.log("chnged")
+    if (this.leaveForm.value.from < this.leaveForm.touched){
+      this.leaveForm.controls['to'].setErrors({required: true})
+      this.leaveForm.controls['days'].setValue("Start date must be earlier than end date")
+    }
+    this.leaveForm.controls['days'].setValue("Start date must be earlier than end date")
+  }
+
+  ngOnInit(): void {
+    console.log(this.calcBusinessDays("2022/12/25", "2022/12/28"))
+
+    this.createLeaveForm();
+  }
+
+  resetMsg(){
+    this.leaveMsg = ''
+  }
+
+  calcBusinessDays(startDate, endDate) {
+    const day: any = moment(startDate, "YYYY-MM-DD");
+    endDate = moment(endDate, "YYYY-MM-DD")
+    let businessDays = 0;
+
+    while (day.isSameOrBefore(endDate,'day')) {
+      if (day.day()!=0 && day.day()!=6) businessDays++;
+      day.add(1,'d');
+    }
+    return businessDays;
   }
 
   onApplyLeave(){
@@ -55,6 +100,12 @@ export class EleaveComponent implements OnInit {
         this.leaveMsg=error.error.msg
       }
     });
+
+    this.createLeaveForm();
+
+
+    this.leaveForm.updateValueAndValidity();
+
   }
 ngOnDestroy(): void {
   if(this.subscription)

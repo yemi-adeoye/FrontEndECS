@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Login } from 'src/app/models/login.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit,OnDestroy {
 
   constructor(private userService: UserService, private router:Router,
     private authService: AuthService) {
-
      }
 
   ngOnInit(): void {
