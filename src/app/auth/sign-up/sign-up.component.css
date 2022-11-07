@@ -26,7 +26,7 @@ h2 {
 }
 
 p {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 100;
 	line-height: 20px;
 	letter-spacing: 0.5px;
@@ -34,7 +34,7 @@ p {
 }
 
 span {
-	font-size: 12px;
+	font-size: 6px;
 }
 
 a {
@@ -111,8 +111,9 @@ input {
 	width: 55%;
 	max-width: 100%;
 	min-height: 580px;
-  margin-top: 5%;
-  margin-left: 23%;
+  	margin-top: 5%;
+	margin-bottom: 5%;
+  	margin-left: 23%;
 }
 
 .form-container {
