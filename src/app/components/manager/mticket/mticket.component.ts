@@ -46,6 +46,7 @@ export class MticketComponent implements OnInit {
           this.adminService.fetchTickets(token)
             .subscribe({
               next: (data) => {
+                console.log(data);
                 this.tickets = data;
               },
               error: (error) => {
