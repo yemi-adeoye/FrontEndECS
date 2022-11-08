@@ -141,8 +141,9 @@ export class MaccessComponent implements OnInit {
   grantAccess(email: string) {
     // a manager can only grant employee access
     const accessGrantMsg = window.prompt("Enter aditional access grant message.");
+    console.log(this.user.role);
     if (this.user.role == 'MANAGER') {
-      console.log(accessGrantMsg);
+
       this.managerService.grantAccess(email, accessGrantMsg, localStorage.getItem('token'))
         .subscribe({
           next: (data) => {
@@ -156,6 +157,12 @@ export class MaccessComponent implements OnInit {
     if (this.user.role == 'ADMIN') {
       console.log(this.userAccessMap[email])
       const accessLevel = this.userAccessMap[email];
+
+      if (!accessLevel){
+        alert("Please select an access level");
+        return;
+      }
+
       this.adminService.grantAccess(email, accessLevel, accessGrantMsg, localStorage.getItem('token'))
 
         .subscribe({

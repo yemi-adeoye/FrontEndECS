@@ -50,18 +50,20 @@
                       {{ e.email }}
                     </td>
                     <td class="text-primary" *ngIf="role == 'ADMIN'">
-                      <select
-                        id="{{ e.email }}"
-                        (change)="updateUserAccessMap($event)"
-                      >
-                        <option VALUE="">Select an access level</option>
-                        <option
-                          *ngFor="let level of levels"
-                          value="{{ level | uppercase }}"
+                      <mat-form-field appearance="fill">
+                        <mat-select
+                          id="{{ e.email }}"
+                          (change)="updateUserAccessMap($event)"
                         >
-                          {{ level }}
-                        </option>
-                      </select>
+                          <mat-option value="">Select access level</mat-option>
+                          <mat-option
+                            *ngFor="let level of levels"
+                            value="{{ level | uppercase }}"
+                          >
+                            {{ level }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     </td>
                     <td>
                       <button
@@ -114,18 +116,20 @@
                       {{ e.email }}
                     </td>
                     <td class="text-primary" *ngIf="role == 'ADMIN'">
-                      <select
-                        id="{{ e.email }}"
-                        (change)="updateUserAccessMap($event)"
-                      >
-                        <option VALUE="">Select an access level</option>
-                        <option
-                          *ngFor="let level of levels"
-                          value="{{ level | uppercase }}"
+                      <mat-form-field appearance="fill">
+                        <mat-select
+                          id="{{ e.email }}"
+                          (change)="updateUserAccessMap($event)"
                         >
-                          {{ level }}
-                        </option>
-                      </select>
+                          <mat-option value="">Select access level</mat-option>
+                          <mat-option
+                            *ngFor="let level of levels"
+                            value="{{ level | uppercase }}"
+                          >
+                            {{ level }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     </td>
                     <td>
                       <button
@@ -177,18 +181,20 @@
                       {{ e.email }}
                     </td>
                     <td class="text-primary" *ngIf="role == 'ADMIN'">
-                      <select
+                      <mat-form-field appearance="fill">
+                      <mat-select
                         id="{{ e.email }}"
                         (change)="updateUserAccessMap($event)"
                       >
-                        <option value="">Select an access level</option>
-                        <option
+                        <mat-option value="">Select access level</mat-option>
+                        <mat-option
                           *ngFor="let level of levels"
                           value="{{ level | uppercase }}"
                         >
                           {{ level }}
-                        </option>
-                      </select>
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
                     </td>
                     <td>
                       <button

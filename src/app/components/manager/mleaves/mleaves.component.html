@@ -1,79 +1,79 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-header card-header-danger">
-                      <h4 class="card-title ">Employee Leaves</h4>
-                      <p class="card-category"> Leaves Pending for Approval/Denial</p>
-                  </div>
-                  <div class="card-body">
-                    <div class="alert alert-success" *ngIf="msg">
-                      <button mat-button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <i class="material-icons">close</i>
-                      </button>
-                      <span>
-                          <b> {{msg}} </b></span>
-                  </div>
-                      <div class="table-responsive">
-                          <table class="table">
-                              <thead class=" text-primary">
-                                  <th>
-                                      Sr. No
-                                  </th>
-                                  <th>
-                                      From Date
-                                  </th>
-                                  <th>
-                                      To Date
-                                  </th>
-
-                                  <th>
-                                      No of Days
-                                  </th>
-
-                                  <th>
-                                    Employee
-                                </th>
-                                  <th>
-
-                                </th>
-                              </thead>
-                              <tbody>
-                                  <tr *ngFor="let l of leaves; let i=index;">
-                                      <td>
-                                          {{i+1}}
-                                      </td>
-                                      <td>
-                                         {{l.from}}
-                                      </td>
-                                      <td>
-                                        {{l.to}}
-                                      </td>
-
-                                      <td class="text-primary">
-                                          {{l.days}}
-                                      </td>
-                                      <td>
-                                        {{l.name}}
-                                      </td>
-                                      <td>
-                                        <button (click)="onLeaveClick('APPROVED',l.id, l.email)" class="btn btn-primary  ">Approve</button> &nbsp;&nbsp;
-                                        <button (click)="onLeaveClick('DENIED',l.id, l.email)" class="btn btn-danger  ">DENY</button>
-                                    </td>
-                                  </tr>
-
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Employee Leaves</h4>
+            <p class="card-category">Leaves Pending for Approval/Denial</p>
           </div>
+          <div class="card-body">
+            <div class="alert alert-success" *ngIf="msg">
+              <button
+                mat-button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <i class="material-icons">close</i>
+              </button>
+              <span>
+                <b> {{ msg }} </b></span
+              >
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <th>Sr. No</th>
+                  <th>From Date</th>
+                  <th>To Date</th>
 
+                  <th>No of Days</th>
+
+                  <th>Employee</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let l of leaves; let i = index">
+                    <td>
+                      {{ i + 1 }}
+                    </td>
+                    <td>
+                      {{ l.from }}
+                    </td>
+                    <td>
+                      {{ l.to }}
+                    </td>
+
+                    <td class="text-primary">
+                      {{ l.days }}
+                    </td>
+                    <td>
+                      {{ l.name }}
+                    </td>
+                    <td>
+                      <button
+                        (click)="onLeaveClick('APPROVED', l.id, l.email)"
+                        class="btn btn-primary"
+                      >
+                        Approve
+                      </button>
+                      &nbsp;&nbsp;
+                      <button
+                        (click)="onLeaveClick('DENIED', l.id, l.email)"
+                        class="btn btn-danger"
+                      >
+                        DENY
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
-
-
-
-
