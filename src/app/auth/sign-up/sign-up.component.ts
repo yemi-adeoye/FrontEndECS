@@ -39,7 +39,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
     this.userService.getAllAdmins().subscribe({
 
-      next: (data) => { console.log(data); this.admins = data.data },
+      next: (data) => { this.admins = data },
       error: (error) => { this.msg = error.error.msg; },
     })
 
