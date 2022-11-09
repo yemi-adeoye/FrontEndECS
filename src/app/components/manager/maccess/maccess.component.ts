@@ -140,7 +140,7 @@ export class MaccessComponent implements OnInit {
 
   grantAccess(email: string) {
     // a manager can only grant employee access
-    const accessGrantMsg = window.prompt("Enter aditional access grant message.");
+    const accessGrantMsg = window.prompt("Enter additional access grant message.");
     console.log(this.user.role);
     if (this.user.role == 'MANAGER') {
 
