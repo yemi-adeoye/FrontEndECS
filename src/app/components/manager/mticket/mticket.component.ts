@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class MticketComponent implements OnInit {
 
   tickets: Ticket[] = [];
+  ticketsHtml: any = {RED: "High", BLUE: "Medium", YELLOW: "Low"}
   msg: string;
   response: string;
   user: UserInfo;

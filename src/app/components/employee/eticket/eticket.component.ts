@@ -15,6 +15,7 @@ export class EticketComponent implements OnInit {
   msg: string = '';
   ticket: Ticket;
   priority: string[];
+  priorityHtml = {}
   subscription: Subscription;
   constructor(private employeeService: EmployeeService) { }
 
@@ -28,6 +29,19 @@ export class EticketComponent implements OnInit {
     this.employeeService.fetchAllPriorities().subscribe({
       next: (data)=>{
           this.priority = data;
+          for (let item of this.priority){
+            switch(item.toUpperCase()){
+              case "RED":
+                this.priorityHtml[item] = "High";
+                break;
+              case "BLUE":
+                this.priorityHtml[item] = "Medium";
+                break;
+              case "YELLOW":
+                this.priorityHtml[item] = "Low";
+                break;
+            }
+          }
       }
     });
   }

@@ -33,7 +33,7 @@
                       <mat-form-field appearance="fill">
                         <mat-label>Select Priority</mat-label>
                         <mat-select formControlName="priority" name="food">
-                          <mat-option *ngFor="let p of priority" value="{{p}}">{{p}}</mat-option>
+                          <mat-option *ngFor="let p of priorityHtml | keyvalue" value="{{p.key}}">{{p.value}}</mat-option>
 
                         </mat-select>
                       </mat-form-field>
