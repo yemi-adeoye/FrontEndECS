@@ -149,7 +149,7 @@
                     </td>
                     <td>
                       <button
-                        *ngIf="e.enabled"
+                        *ngIf="e.enabled && user.id != '1'"
                         (click)="revokeAccess(e.email)"
                         class="btn btn-primary pull-left"
                       >

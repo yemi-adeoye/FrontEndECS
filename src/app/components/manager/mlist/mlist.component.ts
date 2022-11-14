@@ -28,6 +28,7 @@ export class MlistComponent implements OnInit {
     private router: Router) { }
 
   setRole = (userInfo) => {
+    console.log(userInfo)
     this.user = userInfo;
   }
 
